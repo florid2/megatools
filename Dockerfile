@@ -1,15 +1,11 @@
-FROM debian:latest
-LABEL maintainer="florid2"
-
-RUN echo "deb http://http.us.debian.org/debian unstable main non-free contrib" >> /etc/apt/sources.list
-RUN echo "deb-src http://http.us.debian.org/debian unstable main non-free contrib" >> /etc/apt/sources.list
-
-RUN DEBIAN_FRONTEND=noninteractive \
-    apt-get update && \
-    apt-get install -y \
-    megatools \
-    wget \
-    curl && \
-    apt-get clean && \
-    apt-get purge && \
-rm -rf /tmp/*
+FROM ubuntu
+RUN apt-get update && \
+	apt-get install megatools -y
+RUN apt-get -y autoremove && \
+	apt-get -y clean && \
+	rm -rf /var/lib/apt/lists/* && \
+	rm -rf /tmp/* && \
+	rm -rf /var/tmp/*
+        
+RUN locale-gen en_US.UTF-8
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
