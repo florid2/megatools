@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:latest
 RUN apt-get update && \
 	apt-get install megatools -y
 RUN apt-get -y autoremove && \
